@@ -1,0 +1,146 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html>
+
+<script runat="server">
+
+    protected void lbnSignOut_Click(object sender, EventArgs e)
+    {
+        HttpCookie cookiedelete = new HttpCookie("login");
+        cookiedelete.Expires = DateTime.Now.AddDays(-1);
+        Response.Cookies.Add(cookiedelete);
+        Response.Redirect("..\\Index.aspx");
+    }
+
+
+    protected void lbnHomeAdmi_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Admin.aspx");
+    }
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if ((Request.Cookies["login"] == null) ||(Request.Cookies["login"]["user"].ToString().ToLower() != "admin"))
+        {
+            Response.Redirect("..\\Index.aspx");
+        }
+    }
+
+    protected void lbnCategory_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Category.aspx");
+    }
+
+    protected void lbnProduct_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Product.aspx");
+    }
+
+    protected void lbnMember_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("member.aspx");
+    }
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style1 {
+            height: 30px;
+            
+        }
+        .auto-style2 {
+            height: 149px;
+        }
+        #banner{
+            animation: banner 15s infinite;
+            color:white;
+            width:500px;
+            height:145px;
+            text-align:center;
+            font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size:xxx-large;
+            line-height:3;
+            border-radius:7px 3rem;
+        }
+@keyframes banner{
+    0%{
+        background-color: bluegreen;
+        
+    }
+    15%{
+        background-color: rgb(50, 70, 155);
+    }
+    30%{
+        background-color: rgb(80, 54, 177);
+    }
+        50%{
+        background-color: #0099FF;
+    }
+    70%{
+        background-color: rgb(120, 60, 160);
+    }
+    100%{
+        background-color: rgb(50, 70, 155);
+    }
+}
+    </style>
+</head>
+<body style="background-color: #0099FF">
+    <form id="form1" runat="server">
+    <div>
+        <table align="center">
+            <tr>
+                <td class="auto-style2" style="color: #FFFFFF; background-image:linear-gradient(to right,rgba(50, 70, 155),rgb(128, 158, 242)) ; height:140px; border-radius:7px 3rem">
+                    <asp:Label ID="Label1" runat="server" style="width:100%; font-weight: 700; font-size: xx-large" Text="Adminstrative Services" Font-Names="Trebuchet MS"></asp:Label>
+                </td>
+               
+                <td class="auto-style2">
+                    <object style="height: 145px; width: 500px">
+                       <div id="banner">Gift Shop </div> 
+                   </object>
+                </td>
+                <td class="auto-style2">
+                    <asp:Image  style="border-radius:7px 3rem; " ID="Image1" runat="server" Height="145px" ImageUrl="~/Images/images.jpg"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center">
+                    <br />
+                    <br />
+                    <asp:LinkButton ID="lbnCategory" runat="server" style="font-weight: 700; font-size: large" OnClick="lbnCategory_Click">Category</asp:LinkButton>
+&nbsp; ::&nbsp;
+                    <asp:LinkButton ID="lbnProduct" runat="server" style="font-weight: 700; font-size: large" OnClick="lbnProduct_Click">Product</asp:LinkButton>
+&nbsp; ::&nbsp;
+                    <asp:LinkButton ID="lbnMember" runat="server" style="font-weight: 700; font-size: large" OnClick="lbnMember_Click">Member</asp:LinkButton>
+&nbsp; ::&nbsp;
+                    <asp:LinkButton ID="lbnHomeAdmi" runat="server" style="font-weight: 700; font-size: large" OnClick="lbnHomeAdmi_Click">Home Adminstrator</asp:LinkButton>
+&nbsp; ::&nbsp;
+                    <asp:LinkButton ID="lbnSignOut" runat="server" style="font-weight: 700; font-size: large" OnClick="lbnSignOut_Click">Sign Out</asp:LinkButton>
+&nbsp; 
+                    <br />
+                    <hr />
+                </td>
+            </tr>
+            <tr>
+                <td class="auto-style1" colspan="3" style="text-align: center">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        <asp:Panel ID="Panel1" runat="server">
+                        </asp:Panel>
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="text-align: center; font-weight: 700; font-size: large">
+                    <hr />
+                    <br />
+                    All Rights Reserved To Company For Question Send To <a href="mailto:smartacode@gmail.com">Web Master</a></td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
